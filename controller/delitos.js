@@ -55,7 +55,7 @@ const postDelito = async(req, res) => {
 const putDelito = async(req, res) => {
     const {id, tipoHurto, direccion, fecha, ciudad, descripcion} = req.query //desestructurar
     try{
-        const usuarios = await usuarios.findOneAndUpdate({id:id}, {tipoHurto: tipoHurto, direccion: direccion, fecha: fecha, ciudad: ciudad, descripcion: descripcion})//las primeras llaves son el valor por el cual voy a hacer la modificacion el segundo hace referencia a lo que el usuario envio
+        const usuario1 = await delito.findOneAndUpdate({id:id}, {tipoHurto: tipoHurto, direccion: direccion, fecha: fecha, ciudad: ciudad, descripcion: descripcion})//las primeras llaves son el valor por el cual voy a hacer la modificacion el segundo hace referencia a lo que el usuario envio
         mensaje = 'actualizacion exitosa'    
     }catch(error){
         mensaje=error
@@ -66,12 +66,15 @@ const putDelito = async(req, res) => {
 }
 const deleteDelito = async (req, res) => {
     const {id} = req.query
-    let mensaje = 'Actualización exitosa'
+    let mensaje = 'Eliminación exitosa'
     try {
-        const delito = await delito.findOneAndDelete({id:id})
+        const delito1 = await delito.findOneAndDelete({id:id})
     } catch (error) {
         mensaje = error;
     }
+    res.json({
+        msg:mensaje
+    })
 }
 
 module.exports = {
